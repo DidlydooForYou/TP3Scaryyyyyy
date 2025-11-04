@@ -1,3 +1,11 @@
+<<<<<<< Updated upstream
 /Temp
 /Library
 /obj
+=======
+Temp/
+Library/
+Logs/
+Build/
+obj/
+>>>>>>> Stashed changes
