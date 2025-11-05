@@ -1,15 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Condition
+public abstract class Conditions
 {
-    protected bool reverseConditions;
-
+    protected bool reverseCondition;
     abstract public bool Evaluate();
 
-    public bool CheckForConditions(bool result)
+    public bool CheckForReverse(bool result)
     {
-        if (reverseConditions)
-            result = !result;
+        if (reverseCondition)
+            return !result;
         return result;
     }
 }

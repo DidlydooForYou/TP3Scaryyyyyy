@@ -4,33 +4,27 @@ public class Sequence : Node
 {
     Node[] children;
     int index = 0;
-
-    public Sequence(Node[] children, Condition[] conditions, BehaviorTree BT): base(BT, conditions)
+    public Sequence(Node[] Children, Conditions[] condition, BehaviorTree BT) : base(condition, BT)
     {
-        this.children = children;
-        foreach (Node child in children)
-            child.SetParent(this);
+        this.children = Children;
+        foreach (Node n in children)
+        {
+            n.SetParent(this);
+        }
     }
-
-    public override void EvaluateActions()
+    public override void ExecuteAction()
     {
-        base.EvaluateActions();
-        SequenceContinue(index);
+        base.ExecuteAction();
+        children[index].ExecuteAction();
     }
-    
-    public void SequenceContinue(int index)
+    public override void FinishAction(bool result)
     {
-        children[index].EvaluateActions();
-    }
-
-    public override void FinishAction(bool success)
-    {
-        if (!success)
+        if (!result)
         {
             index = 0;
-            base.FinishAction(success);
+            base.FinishAction(false);
         }
-        else if(index == children.Length - 1)
+        else if (index == children.Length - 1)
         {
             index = 0;
             base.FinishAction(true);
@@ -38,7 +32,7 @@ public class Sequence : Node
         else
         {
             index++;
-            children[index].EvaluateActions();
+            children[index].ExecuteAction();
         }
     }
 }

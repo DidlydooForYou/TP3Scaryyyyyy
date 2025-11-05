@@ -1,57 +1,60 @@
-using System.Diagnostics;
+using System;
 using UnityEngine;
 
 public abstract class Node
 {
-    protected BehaviorTree BT;
     protected Node parent;
-    protected Condition[] conditions;
-    protected bool interrupted = false;
+    protected BehaviorTree BT;
 
-    public Node(BehaviorTree BT, Condition[] conditions)
+    protected Conditions[] conditions;
+    protected bool interrupted;
+
+    public Node(Conditions[] conditions, BehaviorTree BT)
     {
         this.BT = BT;
         this.conditions = conditions;
     }
-
+    public Node()
+    {
+    }
     public void SetParent(Node parent)
     {
         this.parent = parent;
     }
-    virtual public void Tick(float deltaTime)
+    public bool EvaluateCondition()
     {
-
-    }
-
-
-    public bool EvaluateConditions()
-    {
-        if (this.conditions == null)
+        if (conditions == null)
             return true;
-        foreach(Condition c in conditions)
+
+        foreach (Conditions c in conditions)
         {
             if (!c.Evaluate())
                 return false;
         }
         return true;
     }
-
-    virtual public void EvaluateActions()
+    virtual public void ExecuteAction()
     {
-        if (!EvaluateConditions())
+        if (!EvaluateCondition())
+        {
             FinishAction(false);
-
+        }
         BT.activeNode = this;
     }
 
-    virtual public void FinishAction(bool success)
+    virtual public void Tick(float deltaTime)
+    {
+
+    }
+    virtual public void FinishAction(bool result)
     {
         if (!interrupted && parent != null)
-            FinishAction(success);
+            parent.FinishAction(result);
         else
+        {
             BT.EvaluateTree();
+        }
     }
-
     virtual public void Interrupt()
     {
         if (parent != null)
