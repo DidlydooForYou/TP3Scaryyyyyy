@@ -61,15 +61,20 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.58f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Condition.cs" />
     <Compile Include="Assets\Scripts\AttaqueCamera.cs" />
-    <Compile Include="Assets\Scripts\Wait.cs" />
-    <Compile Include="Assets\Scripts\GoToTarget.cs" />
-    <Compile Include="Assets\Scripts\BehaviorTree.cs" />
-    <Compile Include="Assets\Scripts\Sequence.cs" />
-    <Compile Include="Assets\Scripts\Node.cs" />
+    <Compile Include="Assets\BehaviorTree\Node.cs" />
+    <Compile Include="Assets\BehaviorTree\Sequence.cs" />
+    <Compile Include="Assets\BehaviorTree\WithinRange.cs" />
+    <Compile Include="Assets\BehaviorTree\Wait.cs" />
+    <Compile Include="Assets\BehaviorTree\NodeBoss\ComportementBoss.cs" />
+    <Compile Include="Assets\BehaviorTree\GoToTarget.cs" />
     <Compile Include="Assets\Scripts\HitboxCamera.cs" />
+    <Compile Include="Assets\BehaviorTree\Condition.cs" />
+    <Compile Include="Assets\BehaviorTree\BehaviorTree.cs" />
+    <Compile Include="Assets\BehaviorTree\Interrupt.cs" />
+    <Compile Include="Assets\BehaviorTree\Selector.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
+    <Compile Include="Assets\BehaviorTree\NodeBoss\MeleeAttack.cs" />
     <Compile Include="Assets\Scripts\SanityUpdate.cs" />
   </ItemGroup>
   <ItemGroup>
